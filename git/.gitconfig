@@ -1,6 +1,12 @@
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+
 [user]
-		name = Mohit Pal Singh 
-		email = mohit.pal.singh@outlook.com 
+	name = Mohit Pal Singh
+	email = mohit.pal.singh@outlook.com
+
+[includeIf "gitdir:~/Documents/workspace/"]
+	path = ~/dotfiles/git/.gitconfig-work
 
 [push]
 		default = upstream 
@@ -12,8 +18,9 @@
 	    prune = true
 
 [core]
-		editor = vim
-		excludesfile = ~/dotfiles/git/.gitignore_global
+    editor = nvim
+    excludesfile = ~/dotfiles/git/.gitignore_global
+    pager = diff-so-fancy | less --tabs=4 -RFX
 
 [color]
 		ui = auto
@@ -30,11 +37,45 @@
 		prompt = 0
 
 [alias]
-	    graph = log --all --graph --pretty=format:'%C(auto)%h%C(auto)%d %s %C(dim white)(%aN, %ar)'
-		graph2 = log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s%x20%x1b[33m(%an)%x1b[0m"
-				
-		# Print branches by last used
-		wip = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads
+    graph = log --all --graph --pretty=format:'%C(auto)%h%C(auto)%d %s %C(dim white)(%aN, %ar)'
+    graph2 = log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s%x20%x1b[33m(%an)%x1b[0m"
+
+    # Print branches by last used
+    wip = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads
+
+    # Common shortcuts
+    st = status
+    co = checkout
+    br = branch
+    ci = commit
+    ca = commit --amend
+    cm = commit -m
+    cp = cherry-pick
+
+    # Useful operations
+    unstage = reset HEAD --
+    discard = checkout --
+    last = log -1 HEAD --stat
+    recent = log -10 --oneline
+    contributors = shortlog -sn
+
+    # Show what I did today
+    today = log --since=midnight --author=\"$(git config user.name)\" --oneline
+
+    # Diff shortcuts
+    df = diff
+    dc = diff --cached
+    ds = diff --stat
+
+    # Branch management
+    branches = branch -a
+    remotes = remote -v
+    cleanup = "!git branch --merged | grep -v '\\*\\|main\\|master' | xargs -n 1 git branch -d"
+
+    # Stash shortcuts
+    sl = stash list
+    sp = stash pop
+    ss = stash save
 
 [init]
 		defaultBranch = main
