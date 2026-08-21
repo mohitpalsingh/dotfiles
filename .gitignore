@@ -1,0 +1,2 @@
+# TPM manages these; do not track
+tmux/plugins/

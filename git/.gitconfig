@@ -21,6 +21,7 @@
     editor = nvim
     excludesfile = ~/dotfiles/git/.gitignore_global
     pager = diff-so-fancy | less --tabs=4 -RFX
+	hooksPath = /Users/mohit.singh/.git-global-hooks
 
 [color]
 		ui = auto

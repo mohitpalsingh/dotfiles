@@ -1,6 +1,12 @@
 [submodule "nvim/.config/init.lua"]
 	path = nvim/.config/init.lua
 	url = https://github.com/mohitpalsingh/init.lua
-[submodule "nvim/nvim/init.lua"]
-	path = nvim/nvim/init.lua
-	url = git@github.com:mohitpalsingh/init.lua.git
+[submodule "zsh/plugins/zsh-autosuggestions"]
+	path = zsh/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "zsh/plugins/zsh-completions"]
+	path = zsh/plugins/zsh-completions
+	url = https://github.com/zsh-users/zsh-completions
+[submodule "zsh/plugins/zsh-syntax-highlighting"]
+	path = zsh/plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting

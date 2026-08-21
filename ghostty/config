@@ -1,2 +1,9 @@
-theme = GruvboxDarkHard
+# Ghostty Configuration
+# Managed in dotfiles; symlinked from:
+#   ~/Library/Application Support/com.mitchellh.ghostty/config
+
+font-family = IosevkaTerm Nerd Font Mono
+font-size = 16.0
+
+theme = Gruvbox Dark Hard
 command = ~/dotfiles/ghostty/tmux_script.sh

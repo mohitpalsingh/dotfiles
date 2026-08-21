@@ -18,6 +18,11 @@ export PATH="$PATH:$HOME/.local/bin"                   # Local binaries (pipx, e
 export PATH="$PATH:$HOME/dotfiles/bash"                  # Dotfiles scripts
 
 # -----------------------------------------------------------------------------
+# Environment (shared with bash)
+# -----------------------------------------------------------------------------
+[ -f ~/dotfiles/env/.env ] && . ~/dotfiles/env/.env
+
+# -----------------------------------------------------------------------------
 # History Configuration
 # -----------------------------------------------------------------------------
 HISTFILE=~/.zsh_history
@@ -56,6 +61,10 @@ autoload -U compinit && compinit
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'  # Case-insensitive completion
 
+# fzf: fuzzy history (Ctrl-R), file finder (Ctrl-T), dir cd (Alt-C)
+[ -f /opt/homebrew/opt/fzf/shell/key-bindings.zsh ] && source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
+[ -f /opt/homebrew/opt/fzf/shell/completion.zsh ] && source /opt/homebrew/opt/fzf/shell/completion.zsh
+
 # -----------------------------------------------------------------------------
 # Plugins
 # -----------------------------------------------------------------------------
@@ -89,11 +98,11 @@ if [ -d "$HOME/perl5" ]; then
 fi
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/mohit.singh/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/mohit.singh/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/mohit.singh/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/mohit.singh/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
 
 # Opencode github mcp Oauth
-export GITHUB_MCP_CLIENT_ID="***REMOVED***"
-export GITHUB_MCP_CLIENT_SECRET="***REMOVED***"
+# Secrets are loaded from ~/.zsh_secrets (not committed to git)
+[ -f "$HOME/.zsh_secrets" ] && . "$HOME/.zsh_secrets"
