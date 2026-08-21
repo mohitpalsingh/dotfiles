@@ -95,3 +95,4 @@ npm "@openai/codex"
 # Explicitly pinned (used in zshrc/nvim but installed as deps)
 brew "ripgrep"
 brew "openjdk@11"
+brew "uv"
