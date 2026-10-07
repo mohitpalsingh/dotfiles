@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key><string>com.mohit.llama-router</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/opt/homebrew/bin/llama-server</string>
+        <string>--models-dir</string><string>/Users/mohit.singh/.llm/models</string>
+        <string>--no-models-autoload</string>
+        <string>--jinja</string>
+        <string>--reasoning</string><string>off</string>
+        <string>--host</string><string>127.0.0.1</string>
+        <string>--port</string><string>8080</string>
+        <string>-ngl</string><string>999</string>
+        <string>-c</string><string>12288</string>
+        <string>-fa</string><string>on</string>
+        <string>--cache-type-k</string><string>q8_0</string>
+        <string>--cache-type-v</string><string>q8_0</string>
+    </array>
+    <key>RunAtLoad</key><true/>
+    <key>KeepAlive</key><true/>
+    <key>StandardOutPath</key><string>/tmp/llama-router.log</string>
+    <key>StandardErrorPath</key><string>/tmp/llama-router.log</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>LLAMA_BASE_URL</key><string>http://127.0.0.1:8080</string>
+    </dict>
+</dict>
+</plist>

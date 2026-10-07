@@ -77,6 +77,7 @@ source ~/dotfiles/zsh/plugins/zsh-completions/zsh-completions.plugin.zsh
 # Custom Scripts
 # -----------------------------------------------------------------------------
 source ~/dotfiles/zsh/keybindings.sh
+source ~/dotfiles/zsh/local-llm.sh
 source ~/dotfiles/zsh/lockbook.sh
 source ~/dotfiles/zsh/prompt.sh
 
@@ -106,3 +107,6 @@ if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-clou
 # Opencode github mcp Oauth
 # Secrets are loaded from ~/.zsh_secrets (not committed to git)
 [ -f "$HOME/.zsh_secrets" ] && . "$HOME/.zsh_secrets"
+
+# Added by git-ai installer on Tue Sep  8 12:16:16 IST 2026
+export PATH="/Users/mohit.singh/.git-ai/bin:$PATH"
