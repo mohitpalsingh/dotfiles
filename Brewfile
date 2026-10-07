@@ -94,6 +94,22 @@ npm "@googleworkspace/cli"
 npm "@openai/codex"
 # Explicitly pinned (used in zshrc/nvim but installed as deps)
 brew "ripgrep"
-brew "openjdk@11"
+brew "openjdk"
 brew "uv"
 brew "llama.cpp"
+
+# Additional installed terminal tools captured during the migration audit.
+tap "steipete/tap"
+brew "steipete/tap/imsg"
+brew "ffmpeg"
+brew "git-filter-repo"
+brew "unbound"
+brew "python@3.14"
+brew "tree-sitter-cli"
+npm "@earendil-works/pi-coding-agent"
+npm "cline"
+cask "gcloud-cli"
+# Dependencies for configured Neovim features (missing on the old machine).
+brew "fd"
+brew "gcc@15"
+brew "delve"

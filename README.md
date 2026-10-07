@@ -1,7 +1,7 @@
 # dotfiles
 
 Personal macOS setup: zsh + tmux + neovim + ghostty, Gruvbox everywhere.
-Everything lives in this repo; `$HOME` only holds symlinks.
+Terminal configs live in this repo; active configs are symlinked from `$HOME`.
 
 ## Layout
 
@@ -28,28 +28,55 @@ dotfiles/
 └── vim/vimrc.vim         # Plain-vim fallback settings
 ```
 
-## Fresh machine / reinstall
+## Fresh Mac: one command after cloning
 
 ```bash
-git clone git@github.com-personal:mohitpalsingh/dotfiles.git ~/dotfiles
-cd ~/dotfiles
-./bootstrap.sh            # brew bundle + submodules + all symlinks + TPM
-source ~/.zshrc
+git clone https://github.com/mohitpalsingh/dotfiles.git ~/dotfiles
+~/dotfiles/bootstrap.sh
 ```
 
-`bootstrap.sh` is idempotent — re-run anytime. Existing files at symlink targets
-are backed up as `<name>.bak.<timestamp>`.
+Open a new Ghostty window after completion. Use HTTPS for the initial clone;
+it works before your personal SSH alias exists. macOS Command Line Tools must
+be installed: if missing, bootstrap opens Apple's installer and asks you to
+finish it and rerun. Homebrew installation may request your macOS password.
 
-## Secrets policy
+The script installs the Brewfile (including desktop apps, fonts, npm and Go
+CLIs), initializes pinned submodules, backs up conflicting files, links configs,
+restores Terminal.app profiles, restores Neovim plugins using `lazy-lock.json`,
+and waits for Mason language servers and Treesitter parsers. It creates the
+Neovim undo directory and NVM directory. tmux uses the current inline bindings;
+TPM is disabled and no plugin installation is needed.
 
-**Nothing secret goes in this repo.** Private tokens live in `~/.zsh_secrets`
-(chmod 600, never committed), sourced automatically by `zshrc.sh`:
+Re-running is safe. Existing config files and broken symlinks are moved to
+`~/.dotfiles-backups/<timestamp>-<pid>/`. Existing Bash startup files are
+preserved; portable Bash fallbacks are installed if they are absent. Both
+Ghostty config locations link to the same file to prevent competing settings.
+Terminal.app should be closed during setup and reopened afterwards.
 
 ```bash
-# ~/.zsh_secrets
-export GITHUB_MCP_CLIENT_ID="..."
-export GITHUB_MCP_CLIENT_SECRET="..."
+./bootstrap.sh --check       # Read-only config links and dependency checks
+./bootstrap.sh --links-only  # Config links only; no downloads or package installs
+./bootstrap.sh --skip-nvim   # Install everything except Neovim plugin/server/parser downloads
+./install.sh                # Compatibility wrapper for bootstrap.sh
 ```
+
+A clone outside `~/dotfiles` is supported by creating a `~/dotfiles` alias.
+An existing unrelated checkout there is never overwritten.
+
+Homebrew installs available versions, with upgrades disabled on reruns. It does
+not restore exact old binary versions. `migration-inventory.txt` captures the
+old machine's versions for reference. Git submodules and Neovim plugins are
+pinned to their recorded commits.
+
+Account logins, private tokens and company-managed Git hooks are outside this
+setup. Existing optional shell secrets loading remains available. Local LLM
+model files and Hermes/Jarvis project installations are also separate from
+terminal dotfiles; see `local-llm/README.md` for the optional model setup.
+Lockbook aliases are preserved; its CLI was absent on the audited Mac.
+
+C++ formatting and the OpenCode RTK plugin are also tracked and linked.
+
+See [migration audit](MIGRATION.md) for the comparison and verification results.
 
 ## Shell quick reference
 
@@ -96,8 +123,8 @@ Prefix: **`Ctrl-a`** (not `Ctrl-b`). Windows start at 1.
 | `v` / `C-v` / `y` | Copy-mode: select / rectangle / yank |
 | `Ctrl-h/j/k/l` | Navigate nvim ↔ tmux panes seamlessly |
 
-Plugins (TPM): sensible, vim-tmux-navigator, yank. Install/update inside tmux
-with `Ctrl-a I`. Plugin dir is gitignored; TPM owns it.
+TPM is currently disabled. Navigation and clipboard bindings are implemented
+in `tmux-keybindings.conf`; no plugin download is required.
 
 ## Neovim
 
@@ -196,5 +223,5 @@ No starter code by design — ACQUIRE MODE: every line typed by hand.
 | Missing completions/colors | `rm ~/.zcompdump* && exec zsh` |
 | nvim LSP not attaching | `:Mason` → check server installed; open nvim from project root so `.venv`/roots resolve |
 | Python DAP says no debugpy | `cd <project> && uv sync` (dev group includes it) |
-| Tmux plugins missing | Inside tmux: `Ctrl-a I` |
+| Tmux navigation bindings missing | Check `~/dotfiles/tmux/tmux-keybindings.conf`; TPM is disabled |
 | Ghostty ignores theme edits | You edited the backup; real file: `~/dotfiles/ghostty/config` |

@@ -1,2 +1,8 @@
 # TPM manages these; do not track
 tmux/plugins/
+
+# Private machine settings and local migration artifacts
+.zsh_secrets
+*.private.tar*
+.env.local
+.DS_Store

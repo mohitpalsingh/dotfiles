@@ -2,17 +2,26 @@
 #                           ZSH Configuration
 # =============================================================================
 
+# Discover Homebrew on Apple Silicon and Intel, including non-login shells.
+for brew_bin in /opt/homebrew/bin/brew /usr/local/bin/brew; do
+    if [[ -x "$brew_bin" ]]; then
+        eval "$("$brew_bin" shellenv)"
+        break
+    fi
+done
+BREW_PREFIX="${HOMEBREW_PREFIX:-/opt/homebrew}"
+
 # -----------------------------------------------------------------------------
 # NVM Configuration (Node Version Manager)
 # -----------------------------------------------------------------------------
 export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+[ -s "${BREW_PREFIX}/opt/nvm/nvm.sh" ] && \. "${BREW_PREFIX}/opt/nvm/nvm.sh"
+[ -s "${BREW_PREFIX}/opt/nvm/etc/bash_completion.d/nvm" ] && \. "${BREW_PREFIX}/opt/nvm/etc/bash_completion.d/nvm"
 
 # -----------------------------------------------------------------------------
 # PATH Configuration
 # -----------------------------------------------------------------------------
-export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"  # Java
+export PATH="${BREW_PREFIX}/opt/openjdk/bin:$PATH"  # Java
 export PATH="$PATH:$HOME/go/bin"                       # Go
 export PATH="$PATH:$HOME/.local/bin"                   # Local binaries (pipx, etc.)
 export PATH="$PATH:$HOME/dotfiles/bash"                  # Dotfiles scripts
@@ -62,8 +71,8 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'  # Case-insensitive completion
 
 # fzf: fuzzy history (Ctrl-R), file finder (Ctrl-T), dir cd (Alt-C)
-[ -f /opt/homebrew/opt/fzf/shell/key-bindings.zsh ] && source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
-[ -f /opt/homebrew/opt/fzf/shell/completion.zsh ] && source /opt/homebrew/opt/fzf/shell/completion.zsh
+[ -f "${BREW_PREFIX}/opt/fzf/shell/key-bindings.zsh" ] && source "${BREW_PREFIX}/opt/fzf/shell/key-bindings.zsh"
+[ -f "${BREW_PREFIX}/opt/fzf/shell/completion.zsh" ] && source "${BREW_PREFIX}/opt/fzf/shell/completion.zsh"
 
 # -----------------------------------------------------------------------------
 # Plugins
@@ -87,6 +96,12 @@ source ~/dotfiles/zsh/prompt.sh
 [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ] && . "$HOME/google-cloud-sdk/path.zsh.inc"
 [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ] && . "$HOME/google-cloud-sdk/completion.zsh.inc"
 
+# Homebrew-installed SDK on a new Mac; old manual installation wins if present.
+if [[ ! -d "$HOME/google-cloud-sdk" ]]; then
+    [ -f "$BREW_PREFIX/share/google-cloud-sdk/path.zsh.inc" ] && . "$BREW_PREFIX/share/google-cloud-sdk/path.zsh.inc"
+    [ -f "$BREW_PREFIX/share/google-cloud-sdk/completion.zsh.inc" ] && . "$BREW_PREFIX/share/google-cloud-sdk/completion.zsh.inc"
+fi
+
 # -----------------------------------------------------------------------------
 # Perl Configuration (only if perl5 directory exists)
 # -----------------------------------------------------------------------------
@@ -98,15 +113,9 @@ if [ -d "$HOME/perl5" ]; then
     export PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"
 fi
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
-
 # Opencode github mcp Oauth
 # Secrets are loaded from ~/.zsh_secrets (not committed to git)
 [ -f "$HOME/.zsh_secrets" ] && . "$HOME/.zsh_secrets"
 
 # Added by git-ai installer on Tue Sep  8 12:16:16 IST 2026
-export PATH="/Users/mohit.singh/.git-ai/bin:$PATH"
+export PATH="$HOME/.git-ai/bin:$PATH"
