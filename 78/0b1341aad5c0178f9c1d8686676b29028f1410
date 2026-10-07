@@ -1,0 +1,55 @@
+.gitignore
+  s_3d11565ad5fad6::t_889287003ded81 3-8
+Brewfile
+  s_3d11565ad5fad6::t_9afb8adbbf2769 97,100-115
+MIGRATION.md
+  s_3d11565ad5fad6::t_c6341ff65931a3 1-70
+README.md
+  s_3d11565ad5fad6::t_4a33a057dbd60e 4,31,34-35,38-41,43-48,50-54,57-60,63-80,126-127,226
+bash/.bash_profile
+  s_3d11565ad5fad6::t_9125fb14e85775 1-9
+bootstrap.sh
+  s_3d11565ad5fad6::t_36cac5e4705509 2,4-17,19-27,29,31-39,41-70,72-93,95-97,99-102
+clang/.clang-format
+  s_3d11565ad5fad6::t_ffd25336890657 1-81
+ghostty/tmux_script.sh
+  s_3d11565ad5fad6::t_a5544bb2230760 2-6,8
+git/.gitconfig
+  s_3d11565ad5fad6::t_5b1bcc033db16c 112-114
+git/.gitignore_global
+  s_3d11565ad5fad6::t_903938671cce5b 58
+install.sh
+  s_3d11565ad5fad6::t_d6d192b7d536fd 2-4
+migration-inventory.txt
+  s_3d11565ad5fad6::t_4563f1288b4d37 1-140
+opencode/plugins/rtk.ts
+  s_3d11565ad5fad6::t_b87aa82dd14748 1-39
+scripts/check.sh
+  s_3d11565ad5fad6::t_9f2ef8383b59a4 1-39
+scripts/nvim-setup.lua
+  s_3d11565ad5fad6::t_ff41d63efe8d47 1-38
+scripts/terminal-setup.py
+  s_3d11565ad5fad6::t_a42679fb13b9a7 1-24
+terminal/profiles.plist
+  s_3d11565ad5fad6::t_368ed06f5d20ed 1-1436
+zsh/zprofile.sh
+  s_3d11565ad5fad6::t_5800c55ca09e13 1-7
+zsh/zshrc.sh
+  s_3d11565ad5fad6::t_fc0c902ca419e8 5-13,18-19,24,74-75,99-104,121
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "780b1341aad5c0178f9c1d8686676b29028f1410",
+  "prompts": {},
+  "sessions": {
+    "s_3d11565ad5fad6": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a11774-04e0-78b1-aded-a4dee8f57e17",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "mohitpalsingh <mohit.pal.singh@outlook.com>"
+    }
+  }
+}
